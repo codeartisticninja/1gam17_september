@@ -13,7 +13,7 @@ import Text        = require("./actors/Text");
 /**
  * Scene class
  * 
- * @date 31-aug-2017
+ * @date 20-sep-2017
  */
 
 class Scene {
@@ -70,13 +70,7 @@ class Scene {
       switch (layer.type) {
         case "objectgroup":
           for (var obj of layer.objects) {
-            if (this.actorTypes[obj.type]) {
-              this.addActor(new this.actorTypes[obj.type](this, obj));
-            } else if (obj.text) {
-              this.addActor(new Text(this, obj));
-            } else {
-              this.addActor(new Actor(this, obj));
-            }
+            this.addActor(this.createActor(obj));
           }
           break;
         case "imagelayer":
@@ -129,6 +123,16 @@ class Scene {
         actor.render();
         g.restore();
       }
+    }
+  }
+
+  createActor(obj:any) {
+    if (this.actorTypes[obj.type]) {
+      return new this.actorTypes[obj.type](this, obj);
+    } else if (obj.text) {
+      return new Text(this, obj);
+    } else {
+      return new Actor(this, obj);
     }
   }
 

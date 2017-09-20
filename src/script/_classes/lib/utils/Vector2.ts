@@ -4,12 +4,33 @@
 /**
  * Vector2 class
  * 
- * @date 11-02-2017
+ * @date 20-sep-2017
  */
+
+var pool:Vector2[]=[];
 
 class Vector2 {
 
+  static dispense() {
+    return pool.pop() || new Vector2();
+  }
+
+  recycle() {
+    if (pool.indexOf(this) !== -1) return;
+    pool.push(this);
+  }
+
   constructor(public x=0, public y=x) {
+  }
+
+  get angle() {
+    if (this.x === 0 && this.y === 0) return 0;
+    return Math.atan2(this.x, -this.y);
+  }
+  set angle(ang:number) {
+    let mag = this.magnitude;
+    this.x = Math.sin(ang) * mag;
+    this.y = -Math.cos(ang) * mag;
   }
 
   get magnitude() {
