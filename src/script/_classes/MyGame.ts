@@ -1,7 +1,7 @@
 "use strict";
 import Game = require("./lib/Game");
 
-import SpaceScene  = require("./scenes/SpaceScene");
+import AdventureScene  = require("./scenes/AdventureScene");
 
 
 /**
@@ -14,8 +14,8 @@ class MyGame extends Game {
   constructor(container:string|HTMLElement) {
     super(container, 960);
     this.frameRate = 12;
-    this.addScene("space", new SpaceScene(this, "./assets/maps/space.json"));
-    this.joypad.mode = "rc";
+    this.addScene("space", new AdventureScene(this, "./assets/maps/space.json"));
+    this.joypad.mode = "gc";
     this.joypad.enable();
     this.startScene("space");
   }

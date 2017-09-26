@@ -7,6 +7,7 @@ import MediaPlayer = require("../lib/utils/MediaPlayer");
 import Script      = require("../lib/utils/Script");
 import Sound       = require("../lib/utils/Sound");
 
+import Aye         = require("./actors/Aye");
 import Ship        = require("./actors/Ship");
 import Spawner     = require("./actors/Spawner");
 import Joy         = require("./actors/Joy");
@@ -24,6 +25,7 @@ class SpaceScene extends Scene {
 
   constructor(game:myGame, map:string) {
     super(game, map);
+    this.actorTypes["Aye"] = Aye;
     this.actorTypes["Ship"] = Ship;
     this.actorTypes["Spawner"] = Spawner;
     this.actorTypes["Joy"] = Joy;
@@ -41,7 +43,6 @@ class SpaceScene extends Scene {
   
   reset() {
     super.reset();
-    this.setAlarm(12, this.challenge);
   }
 
   update() {
