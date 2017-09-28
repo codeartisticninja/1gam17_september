@@ -9,6 +9,7 @@ import Script      = require("../lib/utils/Script");
 import Aye             = require("./actors/Aye");
 import ParticleEmitter = require("../lib/scenes/actors/ParticleEmitter");
 import Emotion         = require("./actors/Emotion");
+import Pill            = require("./actors/Pill");
 //import Trigger     = require("./actors/Trigger");
 //import Dialog      = require("./actors/Dialog");
 
@@ -25,12 +26,15 @@ class AdventureScene extends Scene {
     this.actorTypes["Aye"] = Aye;
     this.actorTypes["ParticleEmitter"] = ParticleEmitter;
     this.actorTypes["Emotion"] = Emotion;
+    this.actorTypes["Pill"] = Pill;
     // this.actorTypes["Trigger"] = Trigger;
+    this.dispencePill = this.dispencePill.bind(this);
   }
 
   reset() {
     super.reset();
     // this.addActor(new Dialog(this));
+    this._pillDispenceTO = this.setAlarm(this.game.frameRate*10, this.dispencePill);
   }
 
   loadScript(url:string) {
@@ -74,8 +78,15 @@ class AdventureScene extends Scene {
     } */
     super.update();
     // this.onOverlap(this.actorsByType["Aye"], this.actorsByType["Trigger"], this.AyeMeetsTrigger, this);
-    this.onOverlap(this.actorsByType["Aye"], this.actorsByType["Wall"], this.AyeMeetsWall, this);
+    // this.onOverlap(this.actorsByType["Aye"], this.actorsByType["Wall"], this.AyeMeetsWall, this);
+    this.onOverlap(this.actorsByType["Aye"], this.actorsByType["Pill"], this.AyeMeetsPill, this);
     this.onOverlap(this.actorsByType["Emotion"], this.actorsByType["Anx"], this.EmotionMeetsAnx, this);
+  }
+
+  dispencePill() {
+    this.clearAlarm(this._pillDispenceTO);
+    this.actorsByName["PillEmitter"].emit();
+    this._pillDispenceTO = this.setAlarm(this.game.frameRate*30, this.dispencePill);
   }
 
   click(x:number, y:number) {
@@ -83,8 +94,9 @@ class AdventureScene extends Scene {
     this.actorsByType["Aye"][0].goTo(this.mouse);
   }
 
-  AyeMeetsWall(aye:Aye, wall:Actor) {
-    aye.snapToEdge(wall);
+  AyeMeetsPill(aye:Aye, pill:Pill) {
+    this.removeActor(pill);
+    aye.getPill();
   }
 
   EmotionMeetsAnx(emotion:Emotion, anx:Actor) {
@@ -100,6 +112,8 @@ class AdventureScene extends Scene {
   /*
     _privates
   */
+
+  private _pillDispenceTO:any;
 
   private _gotoEnter() {
     if (this.script && this.script.storyTree) {

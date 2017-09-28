@@ -12,6 +12,7 @@ class Aye extends Actor {
   public target:Vector2;
   public distanceToTarget:Vector2 = new Vector2();
   public dir:Vector2 = new Vector2();
+  public emotions=0;
 
   constructor(scene:Scene, obj:any) {
     super(scene, obj);
@@ -53,13 +54,19 @@ class Aye extends Actor {
       this.playAnimation("idle");
     }
     super.update();
-    let pe = this.scene.actorsByType["ParticleEmitter"][0];
+    let pe = this.scene.actorsByName["EmotionEmitter"];
     pe.position.copyFrom(this.position);
-    pe.emit();
-    pe.emit();
-    pe.emit();
-    pe.emit();
+    for (let i=0;i<this.emotions;i++) {
+      pe.emit();
+    }
     this.scene.camera.copyFrom(this.position).subtractXY(this.scene.game.canvas.width/2, this.scene.game.canvas.height/2);
+  }
+
+  getPill() {
+    this.emotions++;
+    this.scene.setAlarm(this.scene.game.frameRate*60,()=>{
+      this.emotions--;
+    });
   }
 
   goTo(dest:Vector2) {

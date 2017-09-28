@@ -8,7 +8,7 @@ import Tween    = require("../../utils/Tween");
 /**
  * ParticleEmitter class
  * 
- * @date 20-sep-2017
+ * @date 28-sep-2017
  */
 
 class ParticleEmitter extends Actor {
@@ -34,8 +34,10 @@ class ParticleEmitter extends Actor {
     actor.position.copyFrom(v);
     this._setValues(this.startProps, actor);
     this._setValues(this.endProps, tween.endProps);
-    tween.duration = this.duration;
-    tween.start();
+    if (this.duration > 0) {
+      tween.duration = this.duration;
+      tween.start();
+    }
   }
 
   start(interval:number) {

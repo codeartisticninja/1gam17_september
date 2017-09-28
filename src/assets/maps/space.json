@@ -1,5 +1,4 @@
 { "height":9,
- "infinite":false,
  "layers":[
         {
          "draworder":"topdown",
@@ -59,6 +58,28 @@
                  "width":64,
                  "x":525,
                  "y":255
+                }, 
+                {
+                 "gid":41,
+                 "height":64,
+                 "id":5,
+                 "name":"PillEmitter",
+                 "properties":
+                    {
+                     "duration":-1,
+                     "startProps":"{\"type\": \"Pill\", \"position\": { \"x\": [0, 960], \"y\": -32 }}"
+                    },
+                 "propertytypes":
+                    {
+                     "duration":"int",
+                     "startProps":"string"
+                    },
+                 "rotation":0,
+                 "type":"ParticleEmitter",
+                 "visible":true,
+                 "width":64,
+                 "x":390,
+                 "y":285
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -66,11 +87,10 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":5,
+ "nextobjectid":6,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "templategroups":[],
- "tiledversion":"2017.09.13",
+ "tiledversion":"1.0.3",
  "tileheight":60,
  "tilesets":[
         {
@@ -96,6 +116,19 @@
          "name":"anx",
          "spacing":0,
          "tilecount":8,
+         "tileheight":64,
+         "tilewidth":64
+        }, 
+        {
+         "columns":8,
+         "firstgid":41,
+         "image":"..\/sprites\/pill.png",
+         "imageheight":1024,
+         "imagewidth":512,
+         "margin":0,
+         "name":"pill",
+         "spacing":0,
+         "tilecount":128,
          "tileheight":64,
          "tilewidth":64
         }],
