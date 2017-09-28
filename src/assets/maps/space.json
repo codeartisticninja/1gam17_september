@@ -1,5 +1,4 @@
-{ "backgroundcolor":"#ffffee",
- "height":9,
+{ "height":9,
  "infinite":false,
  "layers":[
         {
@@ -21,7 +20,7 @@
                 {
                  "height":0,
                  "id":2,
-                 "name":"",
+                 "name":"EmotionEmitter",
                  "properties":
                     {
                      "duration":2048,
@@ -38,6 +37,28 @@
                  "width":0,
                  "x":330,
                  "y":150
+                }, 
+                {
+                 "gid":33,
+                 "height":64,
+                 "id":3,
+                 "name":"AnxEmitter",
+                 "properties":
+                    {
+                     "duration":60000,
+                     "startProps":"{\"type\": \"Anx\", \"velocity\":{\"magnitude\":[1,8],\"angle\":[-3.141592653589793,3.141592653589793]},\"opacity\":1}"
+                    },
+                 "propertytypes":
+                    {
+                     "duration":"int",
+                     "startProps":"string"
+                    },
+                 "rotation":0,
+                 "type":"ParticleEmitter",
+                 "visible":true,
+                 "width":64,
+                 "x":525,
+                 "y":255
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -45,7 +66,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":3,
+ "nextobjectid":5,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "templategroups":[],
@@ -64,6 +85,19 @@
          "tilecount":32,
          "tileheight":128,
          "tilewidth":128
+        }, 
+        {
+         "columns":4,
+         "firstgid":33,
+         "image":"..\/sprites\/anx.png",
+         "imageheight":128,
+         "imagewidth":256,
+         "margin":0,
+         "name":"anx",
+         "spacing":0,
+         "tilecount":8,
+         "tileheight":64,
+         "tilewidth":64
         }],
  "tilewidth":60,
  "type":"map",

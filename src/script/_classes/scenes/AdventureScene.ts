@@ -68,9 +68,14 @@ class AdventureScene extends Scene {
   }
 
   update() {
+    /* for(let i=0;i<4;i++) {
+      this.actorsByName["AnxEmitter"].position.set(Math.random()*this.size.x, Math.random()*this.size.y);
+      this.actorsByName["AnxEmitter"].emit();
+    } */
     super.update();
     // this.onOverlap(this.actorsByType["Aye"], this.actorsByType["Trigger"], this.AyeMeetsTrigger, this);
     this.onOverlap(this.actorsByType["Aye"], this.actorsByType["Wall"], this.AyeMeetsWall, this);
+    this.onOverlap(this.actorsByType["Emotion"], this.actorsByType["Anx"], this.EmotionMeetsAnx, this);
   }
 
   click(x:number, y:number) {
@@ -80,6 +85,10 @@ class AdventureScene extends Scene {
 
   AyeMeetsWall(aye:Aye, wall:Actor) {
     aye.snapToEdge(wall);
+  }
+
+  EmotionMeetsAnx(emotion:Emotion, anx:Actor) {
+    this.removeActor(anx);
   }
 
   /* AyeMeetsTrigger(aye:Aye, trigger:Trigger) {
