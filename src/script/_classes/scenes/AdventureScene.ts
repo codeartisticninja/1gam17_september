@@ -6,12 +6,10 @@ import Actor       = require("../lib/scenes/actors/Actor");
 import MediaPlayer = require("../lib/utils/MediaPlayer");
 import Script      = require("../lib/utils/Script");
 
-import Aye             = require("./actors/Aye");
 import ParticleEmitter = require("../lib/scenes/actors/ParticleEmitter");
+import Aye             = require("./actors/Aye");
 import Emotion         = require("./actors/Emotion");
 import Pill            = require("./actors/Pill");
-//import Trigger     = require("./actors/Trigger");
-//import Dialog      = require("./actors/Dialog");
 
 /**
  * AdventureScene class
@@ -27,61 +25,19 @@ class AdventureScene extends Scene {
     this.actorTypes["ParticleEmitter"] = ParticleEmitter;
     this.actorTypes["Emotion"] = Emotion;
     this.actorTypes["Pill"] = Pill;
-    // this.actorTypes["Trigger"] = Trigger;
     this.dispencePill = this.dispencePill.bind(this);
   }
 
   reset() {
     super.reset();
-    // this.addActor(new Dialog(this));
     this.game.mediaChannels.music.play("./assets/music/AuditoryCheesecake_Avalon.mp3", true);
     this._pillDispenceTO = this.setAlarm(this.game.frameRate*10, this.dispencePill);
   }
 
-  loadScript(url:string) {
-    this.script = new Script(url, this.game.scriptVars);
-    this.script.commands["p"] = (attrs:any, body:string, el:Element, cb:Function) => {
-      this.actorsByType["Dialog"][0].say(body, cb);
-    }
-    this.script.commands["wait"] = (attrs:any, body:string, el:Element, cb:Function) => {
-      this.setAlarm(parseInt(body), cb);
-    }
-    this.script.commands["scene"] = (attrs:any, body:string) => {
-      this.game.startScene(body);
-    }
-    this.script.commands["track"] = (attrs:any, body:string, el:Element, cb:Function) => {
-      this.game.trackEvent(body);
-      cb();
-    }
-    this.script.commands["sleep"] = (attrs:any, body:string, el:Element, cb:Function) => {
-      this.actorsByType["Aye"][0].sleep();
-      cb();
-    }
-    this.script.commands["do"] = (attrs:any, body:string, el:Element, cb:Function) => {
-      this.actorsByType["Aye"][0].doSomething();
-      cb();
-    }
-    this.script.commands["idle"] = (attrs:any, body:string, el:Element, cb:Function) => {
-      this.actorsByType["Aye"][0].doNothing();
-      cb();
-    }
-  }
-
-  enter() {
-    super.enter();
-    this._gotoEnter();
-  }
 
   update() {
-    /* for(let i=0;i<4;i++) {
-      this.actorsByName["AnxEmitter"].position.set(Math.random()*this.size.x, Math.random()*this.size.y);
-      this.actorsByName["AnxEmitter"].emit();
-    } */
     super.update();
-    // this.onOverlap(this.actorsByType["Aye"], this.actorsByType["Trigger"], this.AyeMeetsTrigger, this);
-    // this.onOverlap(this.actorsByType["Aye"], this.actorsByType["Wall"], this.AyeMeetsWall, this);
     this.onOverlap(this.actorsByType["Aye"], this.actorsByType["Pill"], this.AyeMeetsPill, this);
-    this.onOverlap(this.actorsByType["Emotion"], this.actorsByType["Anx"], this.EmotionMeetsAnx, this);
   }
 
   dispencePill() {
@@ -100,15 +56,6 @@ class AdventureScene extends Scene {
     aye.getPill();
   }
 
-  EmotionMeetsAnx(emotion:Emotion, anx:Actor) {
-    this.removeActor(anx);
-  }
-
-  /* AyeMeetsTrigger(aye:Aye, trigger:Trigger) {
-    let joy = this.game.joypad;
-    // if (joy.fire) aye.position.x = trigger.position.x;
-    trigger.hover();
-  } */
 
   /*
     _privates
