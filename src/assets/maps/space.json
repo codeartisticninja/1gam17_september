@@ -38,28 +38,6 @@
                  "y":150
                 }, 
                 {
-                 "gid":33,
-                 "height":64,
-                 "id":3,
-                 "name":"AnxEmitter",
-                 "properties":
-                    {
-                     "duration":60000,
-                     "startProps":"{\"type\": \"Anx\", \"velocity\":{\"magnitude\":[1,8],\"angle\":[-3.141592653589793,3.141592653589793]},\"opacity\":1}"
-                    },
-                 "propertytypes":
-                    {
-                     "duration":"int",
-                     "startProps":"string"
-                    },
-                 "rotation":0,
-                 "type":"ParticleEmitter",
-                 "visible":true,
-                 "width":64,
-                 "x":525,
-                 "y":255
-                }, 
-                {
                  "gid":41,
                  "height":64,
                  "id":5,

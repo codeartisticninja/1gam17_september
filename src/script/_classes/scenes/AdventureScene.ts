@@ -34,6 +34,7 @@ class AdventureScene extends Scene {
   reset() {
     super.reset();
     // this.addActor(new Dialog(this));
+    this.game.mediaChannels.music.play("./assets/music/AuditoryCheesecake_Avalon.mp3", true);
     this._pillDispenceTO = this.setAlarm(this.game.frameRate*10, this.dispencePill);
   }
 
