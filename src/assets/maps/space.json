@@ -1,4 +1,5 @@
 { "height":9,
+ "infinite":false,
  "layers":[
         {
          "draworder":"topdown",
@@ -38,7 +39,7 @@
                  "y":150
                 }, 
                 {
-                 "gid":41,
+                 "gid":33,
                  "height":64,
                  "id":5,
                  "name":"PillEmitter",
@@ -68,7 +69,8 @@
  "nextobjectid":6,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.0.3",
+ "templategroups":[],
+ "tiledversion":"2017.09.13",
  "tileheight":60,
  "tilesets":[
         {
@@ -85,21 +87,8 @@
          "tilewidth":128
         }, 
         {
-         "columns":4,
-         "firstgid":33,
-         "image":"..\/sprites\/anx.png",
-         "imageheight":128,
-         "imagewidth":256,
-         "margin":0,
-         "name":"anx",
-         "spacing":0,
-         "tilecount":8,
-         "tileheight":64,
-         "tilewidth":64
-        }, 
-        {
          "columns":8,
-         "firstgid":41,
+         "firstgid":33,
          "image":"..\/sprites\/pill.png",
          "imageheight":1024,
          "imagewidth":512,
