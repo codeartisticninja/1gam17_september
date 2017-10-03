@@ -1,5 +1,5 @@
 "use strict";
-
+import web = require("./web");
 
 /**
  * Sound class
@@ -45,17 +45,13 @@ class Sound {
   load(src=this.file, cb?:Function) {
     if (!Sound.enabled) return;
     this.file = src;
-    var req = new XMLHttpRequest();
-    req.open("GET", src, true);
-    req.responseType = "arraybuffer";
-    req.onload = () => {
+    web.get(src, { responseType: "arraybuffer" }, (req:XMLHttpRequest)=>{
       var data = req.response;
       Sound.ctx.decodeAudioData(data, (buffer)=>{
         this.buffer = buffer;
         cb && cb();
       });
-    }
-    req.send();
+    });
   }
 
   play(mark="_all", loop=false) {

@@ -1,4 +1,5 @@
 "use strict";
+import lazyJSON = require("./lazyJSON");
 
 /**
  * web module
@@ -6,11 +7,17 @@
  * @date 03-oct-2017
  */
 module web {
-  export function get(url:string, cb:Function) {
+  export function get(url:string, options?:any, cb?:Function) {
     let req = new XMLHttpRequest();
+    if (options) {
+      if (typeof options === "function") cb = <Function>options;
+      else {
+        lazyJSON.setProperties(options, req);
+      }
+    }
     req.open("GET", url, true);
     req.addEventListener("loadend", function(e:ProgressEvent){
-      cb(req);
+      cb && cb(req);
     })
     req.send();
     return req;

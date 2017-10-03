@@ -1,4 +1,5 @@
 "use strict";
+import web = require("./web");
 
 /**
  * Script class
@@ -25,17 +26,12 @@ class Script {
   }
 
   load(url:string, cb?:Function) {
-    var r = new XMLHttpRequest();
-    r.responseType = "document";
-    r.open("GET", url, true);
-    r.onreadystatechange = () => {
-      if (r.readyState != 4 || r.status != 200) return;
+    web.get(url, { responseType: "document" } ,(r:XMLHttpRequest)=>{
       this.url = url;
       this.storyTree = r.response;
       this._IdEverything();
       cb && cb();
-    };
-    r.send();
+    });
   }
 
   continue(current:Element|null) {
