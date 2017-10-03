@@ -1,11 +1,10 @@
-/// <reference path="../../../_d.ts/node.d.ts"/>
 "use strict";
 import Game        = require("../Game");
 import Actor       = require("./actors/Actor");
 import Sprite      = require("./actors/Sprite");
 import Scenery     = require("./actors/Scenery");
 import Vector2     = require("../utils/Vector2");
-import http        = require("http");
+import web         = require("../utils/web");
 import lazyJSON    = require("../utils/lazyJSON");
 
 import Text        = require("./actors/Text");
@@ -37,20 +36,15 @@ class Scene {
   }
 
   reset() {
-    var _t = this;
     this.actors = [];
     this.actorsByType = {};
     this.clearAllAlarms();
     if (this.mapUrl) {
       this.game.loading++;
-      http.get(this.mapUrl, function(res){
-        var data = "";
-        res.on("data", function(chunk:string){ data += chunk; });
-        res.on("end", function() {
-          _t.mapData = JSON.parse(data.trim());
-          _t.loadMap();
-          _t.game.loaded++;
-        });
+      web.get(this.mapUrl, (req:XMLHttpRequest)=>{
+        this.mapData = JSON.parse(req.responseText.trim());
+        this.loadMap();
+        this.game.loaded++;
       });
     }
   }

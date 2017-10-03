@@ -1,6 +1,5 @@
-/// <reference path="../../../_d.ts/node.d.ts"/>
 "use strict";
-import url = require("url");
+import web = require("../utils/web");
 
 /**
  * StorageFile class
@@ -17,7 +16,7 @@ class StorageFile {
   private _onSetValues:{[index:string]:string} = {};
 
   constructor(uri:string, public data:any={}) {
-    this.url = url.resolve(location.pathname, uri);
+    this.url = web.resolveUrl(location.pathname, uri);
     if (cache[this.url]) {
       return cache[this.url];
     } else {
@@ -106,7 +105,7 @@ class StorageFile {
   }
 
   open(uri:string) {
-    return new StorageFile(url.resolve(this.url, uri));
+    return new StorageFile(web.resolveUrl(this.url, uri));
   }
 
   _runListeners() {
