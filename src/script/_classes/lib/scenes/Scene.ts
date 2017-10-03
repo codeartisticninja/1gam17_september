@@ -13,16 +13,17 @@ import Text        = require("./actors/Text");
 /**
  * Scene class
  * 
- * @date 20-sep-2017
+ * @date 03-oct-2017
  */
 
+
 class Scene {
-  public actorTypes:Object = {};
+  public actorTypes:{[index:string]:typeof Actor} = {};
   public actors:Actor[];
-  public actorsByType:Object;
-  public actorsByName:Object = {};
+  public actorsByType:{[index:string]: Actor[]};
+  public actorsByName:{[index:string]: Actor} = {};
   public spritesByFirstGid:Sprite[]=[];
-  public spritesByName:Object = {};
+  public spritesByName:{[index:string]: Sprite} = {};
   public size:Vector2 = new Vector2();
   public gravity:Vector2 = new Vector2();
   public camera:Vector2 = new Vector2();
@@ -60,7 +61,8 @@ class Scene {
   }
 
   loadMap() {
-    var mapFolder = this.mapUrl.substr(0, this.mapUrl.lastIndexOf("/")+1);
+    var mapUrl = this.mapUrl || "./";
+    var mapFolder = mapUrl.substr(0, mapUrl.lastIndexOf("/")+1);
     this.size.set(this.mapData.width*this.mapData.tilewidth, this.mapData.height*this.mapData.tileheight);
     this.backgroundColor = this.mapData.backgroundcolor;
     for (var tileset of this.mapData.tilesets) {
@@ -160,8 +162,7 @@ class Scene {
           group.splice(i,1);
         }
       }
-      this.actorsByName[actor.name] = null;
-      actor.scene = null;
+      delete this.actorsByName[actor.name];
     });
     return actor;
   }

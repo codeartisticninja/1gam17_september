@@ -8,9 +8,9 @@ import Vector2     = require("./utils/Vector2");
 
 if (!Element.prototype.requestFullscreen) {
     Element.prototype.requestFullscreen = 
-        Element.prototype["webkitRequestFullscreen"] || 
-        Element.prototype["mozRequestFullScreen"] ||
-        Element.prototype["msRequestFullscreen"];
+        (<any>Element).prototype["webkitRequestFullscreen"] || 
+        (<any>Element).prototype["mozRequestFullScreen"] ||
+        (<any>Element).prototype["msRequestFullscreen"];
 }
 if (!window.requestAnimationFrame) {
   window.requestAnimationFrame = webkitRequestAnimationFrame || function(cb:Function){ return setTimeout(cb, 32, Date.now()) };
@@ -20,7 +20,7 @@ if (!window.requestAnimationFrame) {
 /**
  * BaseGameApp class
  * 
- * @date 31-aug-2017
+ * @date 03-oct-2017
  */
 
 class Game {
@@ -33,9 +33,9 @@ class Game {
   public saveFile = new StorageFile("save.json");
   public prefs = new StorageFile("/prefs.json");
   public joypad = joypad;
-  public scenes = {};
+  public scenes:{[index:string]:Scene} = {};
   public scene:Scene;
-  public mediaChannels = {
+  public mediaChannels:{[index:string]: MediaPlayer} = {
     "sfx":      new MediaPlayer(),
     "music":    new MediaPlayer(),
     "ambiance": new MediaPlayer()
@@ -98,8 +98,7 @@ class Game {
   removeScene(sceneName:string) {
     if (this.scene === this.scenes[sceneName]) this.startScene("main");
     if (this.scenes[sceneName]) {
-      this.scenes[sceneName].game = null;
-      this.scenes[sceneName] = null;
+      delete this.scenes[sceneName];
     }
   }
   startScene(sceneName:string) {
@@ -116,8 +115,8 @@ class Game {
   }
 
   trackEvent(event:string) {
-    if (window["_paq"]) {
-      window["_paq"].push(['trackEvent', document.title, event]);
+    if ((<any>window)["_paq"]) {
+      (<any>window)["_paq"].push(['trackEvent', document.title, event]);
     }
   }
 
@@ -139,12 +138,12 @@ class Game {
     this._canvas = document.createElement("canvas");
     this._canvas.width = width;
     this._canvas.height = height;
-    this._ctx = this._canvas.getContext("2d");
+    this._ctx = <CanvasRenderingContext2D>this._canvas.getContext("2d");
     this.container.appendChild(this._canvas);
     this.canvas = document.createElement("canvas");
     this.canvas.width = width;
     this.canvas.height = height;
-    this.ctx = this.canvas.getContext("2d");
+    this.ctx = <CanvasRenderingContext2D>this.canvas.getContext("2d");
     this._canvas.addEventListener("click", this._click.bind(this));
     this._tick();
   }

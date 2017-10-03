@@ -4,11 +4,11 @@
 /**
  * Tween class
  * 
- * @date 20-sep-2017
+ * @date 03-oct-2017
  */
 
 class Tween {
-  constructor(public object:Object, public endProps:Object, public duration:number, autostart=true) {
+  constructor(public object:any, public endProps:any, public duration:number, autostart=true) {
     this.update = this.update.bind(this);
     if (autostart) this.start();
   }
@@ -59,12 +59,12 @@ class Tween {
   /*
     _privates
   */
-  private _startProps:Object;
+  private _startProps:any;
   private _startTime:number;
   private _updateTO:any;
   private _callbacks:Function[]=[];
 
-  private _setValues(object:Object, startProps:Object, endProps:Object, progress:number) {
+  private _setValues(object:any, startProps:any, endProps:any, progress:number) {
     for (var key in endProps) {
       if (typeof object[key] === "object") {
         object[key] = object[key] || {};

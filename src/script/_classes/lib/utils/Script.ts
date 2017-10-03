@@ -3,17 +3,17 @@
 /**
  * Script class
  * 
- * @date 14-aug-2017
+ * @date 03-oct-2017
  */
 
 class Script {
   public url:string;
   public storyTree:XMLDocument;
   public commands: { [key:string]:Function }={};
-  public current:Element;
+  public current:Element|null;
   // public next:Element;
 
-  constructor(url?:string, public variables={}) {
+  constructor(url?:string, public variables:any={}) {
     this.commands["p"] = (attrs:any, body:string, el:Element, cb:Function) => {
       console.log(body);
       setTimeout(cb, body.length*100);
@@ -38,7 +38,7 @@ class Script {
     r.send();
   }
 
-  continue(current:Element) {
+  continue(current:Element|null) {
     this.current = current;
     if (!current) return;
     var cond = this._lazyJSON(this._evaluate(current.getAttribute("if") || "true"));
@@ -50,7 +50,7 @@ class Script {
       var attrs = this._getAttributes(current);
       var el = <Element>this.storyTree.importNode(current, true);
       this._cullChildren(el);
-      var body = this._evaluate(el.textContent);
+      var body = this._evaluate(""+el.textContent);
       var done = false;
       this.commands[current.tagName](attrs, body, el, ()=>{
         if (done=!done) this.continue(current.nextElementSibling);
@@ -68,12 +68,12 @@ class Script {
     this.continue(this.getElement(path));
   }
 
-  getVisits(path:string=".", el?:Element) {
-    var el = this.getElement(path, el);
-    return this.variables[el.id+"_v"] || 0;
+  getVisits(path:string=".", el=this.current) {
+    el = this.getElement(path, el);
+    return el && this.variables[el.id+"_v"] || 0;
   }
   getElement(path:string, el=this.current) {
-    while (path) {
+    while (path && el) {
       switch (path[0]) {
         case ".":
           el = el.parentElement;
@@ -94,7 +94,7 @@ class Script {
       
         default:
           el = this.storyTree.querySelector(path);
-          path = null;
+          path = "";
           break;
       }
     }
@@ -131,7 +131,7 @@ class Script {
     while (child) {
       var attrs = this._getAttributes(child);
       if (!attrs["if"]) {
-        child.parentElement.removeChild(child);
+        child.parentElement && child.parentElement.removeChild(child);
       } else {
         for (var name in attrs) {
           child.setAttribute(name, attrs[name]);

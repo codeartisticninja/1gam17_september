@@ -4,7 +4,7 @@ import Vector2 = require("./Vector2");
 /**
  * joypad module for unified game controls on the web
  * 
- * @date 01-sep-2017
+ * @date 03-oct-2017
  */
 if (!window.requestAnimationFrame) {
   window.requestAnimationFrame = webkitRequestAnimationFrame || function(cb:Function){ return setTimeout(cb, 32) };
@@ -20,7 +20,7 @@ interface JoyTouch {
 module joypad {
   export var
     enabled:boolean  = false,
-    device:string    = localStorage.getItem("joypad.device"),
+    device:string    = ""+localStorage.getItem("joypad.device"),
     mode:string,
     UIparent:HTMLElement = document.body,
 
@@ -147,14 +147,14 @@ module joypad {
     }
     _updateUI();
     for (var key in joypad.delta) {
-      if (joypad[key] instanceof Vector2) {
+      if ((<any>joypad)[key] instanceof Vector2) {
         if (!(joypad.delta[key] instanceof Vector2)) joypad.delta[key] = new Vector2();
         if (!(_lastState[key] instanceof Vector2)) _lastState[key] = new Vector2();
-        joypad[key].subtract(_lastState[key], joypad.delta[key]);
-        _lastState[key].copyFrom(joypad[key]);
+        (<any>joypad)[key].subtract(_lastState[key], joypad.delta[key]);
+        _lastState[key].copyFrom((<any>joypad)[key]);
       } else {
-        joypad.delta[key] = joypad[key] - _lastState[key];
-        _lastState[key] = joypad[key];
+        joypad.delta[key] = (<any>joypad)[key] - _lastState[key];
+        _lastState[key] = (<any>joypad)[key];
       }
     }
   }
@@ -171,7 +171,7 @@ module joypad {
   var
     _keyboardEnabled:boolean,
     _keyMap:string[]    = _getKeyMap(),
-    _keysDown:Object = {},
+    _keysDown:{[index:string]:boolean} = {},
     _shiftKey:boolean,
     _;
 
@@ -187,7 +187,7 @@ module joypad {
 
   function _getKeyMap() {
     var map:string[] = [],
-        ctrls = {
+        ctrls:{[index:string]:number[]} = {
           "left": [37, 65],
           "right": [39, 68],
           "up": [38, 87, 80],
@@ -278,7 +278,7 @@ module joypad {
     var rightPad = <HTMLElement>_touchUI.querySelector(".right");
     for (var j = 0; j < e.changedTouches.length; j++) {
       var touchEvent = e.changedTouches[j];
-      var touch:JoyTouch;
+      var touch:JoyTouch|null=null;
       if (leftPad === touchEvent.target || leftPad.contains(<Node>touchEvent.target)) {
         touch = _leftThumb;
         _touchUI.classList.remove("inactive");
@@ -300,7 +300,7 @@ module joypad {
   function _onTouchMove(e:TouchEvent) {
     for (var j = 0; j < e.changedTouches.length; j++) {
       var touchEvent = e.changedTouches[j];
-      var touch:JoyTouch;
+      var touch:JoyTouch|null=null;
       if (_leftThumb.id === touchEvent.identifier) touch = _leftThumb;
       if (_rightThumb.id === touchEvent.identifier) touch = _rightThumb;
       if (touch) {
@@ -325,7 +325,7 @@ module joypad {
     }
     for (var j = 0; j < e.changedTouches.length; j++) {
       var touchEvent = e.changedTouches[j];
-      var touch:JoyTouch;
+      var touch:JoyTouch|null=null;
       if (_leftThumb.id === touchEvent.identifier)  touch = _leftThumb;
       if (_rightThumb.id === touchEvent.identifier) touch = _rightThumb;
       if (touch) {
@@ -494,7 +494,7 @@ module joypad {
   var
     _updateTO:any,
     _lastState:any = {},
-    _suspended:string[],
+    _suspended:string[]|null,
     _;
 
 }

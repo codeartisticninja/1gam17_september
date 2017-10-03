@@ -4,7 +4,7 @@ import Tween = require("./Tween");
 /**
  * MediaPlayer class
  * 
- * @date 12-aug-2017
+ * @date 03-oct-2017
  */
 
 class MediaPlayer {
@@ -44,7 +44,7 @@ class MediaPlayer {
     var player:HTMLAudioElement;
     if (!this.enabled) return false;
     this.pause(fadeDuration);
-    this.players.push(this.players.shift());
+    this.players.push(<HTMLAudioElement>this.players.shift());
     player = this.players[0];
     player.src = url;
     player.volume = this.volume;

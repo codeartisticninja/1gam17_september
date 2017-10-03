@@ -8,7 +8,7 @@ import lazyJSON = require("../../utils/lazyJSON");
 /**
  * Actor class
  * 
- * @date 02-sep-2017
+ * @date 03-oct-2017
  */
 
 interface Animation {
@@ -40,10 +40,10 @@ class Actor {
   public angularMomentum:number=1;
   public angularFriction:number=0;
 
-  public animations = {};
-  public animation:Animation;
+  public animations:{[index:string]:Animation} = {};
+  public animation:Animation|null;
   public animationFrame:number;
-  public nextAnimation:Animation;
+  public nextAnimation:Animation|null;
 
   constructor(public scene:Scene, obj?:any) {
     if (obj) {

@@ -3,13 +3,15 @@ import Actor   = require("../../lib/scenes/actors/Actor");
 import Scene   = require("../../lib/scenes/Scene");
 import Vector2 = require("../../lib/utils/Vector2");
 
+import ParticleEmitter = require("../../lib/scenes/actors/ParticleEmitter");
+
 /**
  * Aye class
  */
 
 class Aye extends Actor {
   public state:string;
-  public target:Vector2;
+  public target:Vector2|null;
   public distanceToTarget:Vector2 = new Vector2();
   public dir:Vector2 = new Vector2();
   public emotions=0;
@@ -55,7 +57,7 @@ class Aye extends Actor {
       this.playAnimation("idle");
     }
     super.update();
-    let pe = this.scene.actorsByName["EmotionEmitter"];
+    let pe = <ParticleEmitter>this.scene.actorsByName["EmotionEmitter"];
     pe.position.copyFrom(this.position);
     for (let i=0;i<this.emotions;i++) {
       pe.emit();
@@ -78,39 +80,6 @@ class Aye extends Actor {
     this.dir.magnitude = 1;
   }
 
-  doNothing() {
-    for(let thing of this.scene.actorsByType["Thing"]) {
-      if (this.overlapsWith(thing)) {
-        thing.deactivate();
-      }
-    }
-    this.state = null;
-  }
-
-  doSomething() {
-    for(let thing of this.scene.actorsByType["Thing"]) {
-      if (this.overlapsWith(thing)) {
-        this.position.x = thing.position.x;
-        thing.activate();
-      }
-    }
-    this.state = "doing";
-    this.playAnimation("do");
-    this.velocity.set(0);
-  }
-
-  sleep() {
-    for(let thing of this.scene.actorsByType["Thing"]) {
-      if (this.overlapsWith(thing)) {
-        this.position.x = thing.position.x;
-        thing.activate();
-      }
-    }
-    this.state = "sleeping";
-    this.scale.x = 1;
-    this.playAnimation("sleep");
-    this.velocity.set(0);
-  }
 
   /*
     _privates

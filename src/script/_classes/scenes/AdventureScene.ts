@@ -42,13 +42,13 @@ class AdventureScene extends Scene {
 
   dispencePill() {
     this.clearAlarm(this._pillDispenceTO);
-    this.actorsByName["PillEmitter"].emit();
+    (<ParticleEmitter>this.actorsByName["PillEmitter"]).emit();
     this._pillDispenceTO = this.setAlarm(this.game.frameRate*30, this.dispencePill);
   }
 
   click(x:number, y:number) {
     super.click(x,y);
-    this.actorsByType["Aye"][0].goTo(this.mouse);
+    (<Aye>this.actorsByType["Aye"][0]).goTo(this.mouse);
   }
 
   AyeMeetsPill(aye:Aye, pill:Pill) {

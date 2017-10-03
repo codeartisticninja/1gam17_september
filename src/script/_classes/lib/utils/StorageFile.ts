@@ -5,18 +5,18 @@ import url = require("url");
 /**
  * StorageFile class
  * 
- * @date 07-06-2016
+ * @date 03-oct-2017
  */
 
-var cache = {};
+var cache:{[index:string]:StorageFile} = {};
 
 class StorageFile {
   public url:string;
   public storage:Storage;
-  private _onSetListeners = {};
-  private _onSetValues = {};
+  private _onSetListeners:{[index:string]:Function[]} = {};
+  private _onSetValues:{[index:string]:string} = {};
 
-  constructor(uri:string, public data={}) {
+  constructor(uri:string, public data:any={}) {
     this.url = url.resolve(location.pathname, uri);
     if (cache[this.url]) {
       return cache[this.url];
@@ -34,9 +34,9 @@ class StorageFile {
   load() {
     if (this.storage.getItem(this.url)) {
       try {
-        this.data = JSON.parse(this.storage.getItem(this.url));
+        this.data = JSON.parse(""+this.storage.getItem(this.url));
       } catch (err) {
-        this.data = this.storage.getItem(this.url);
+        this.data = ""+this.storage.getItem(this.url);
       }
     }
     return this.data;
@@ -61,7 +61,7 @@ class StorageFile {
     var data = this.data;
     while (keys.length > 1) {
       if (!data[keys[0]]) return undefined;
-      data = data[keys.shift()];
+      data = data[keys.shift()||0];
     }
     return data[keys[0]];
   }
@@ -71,7 +71,7 @@ class StorageFile {
     var data = this.data;
     while (keys.length > 1) {
       if (!data[keys[0]]) data[keys[0]] = {};
-      data = data[keys.shift()];
+      data = data[keys.shift()||0];
     }
     if (data[keys[0]] === value) return;
     if (ifUndefined && (data[keys[0]] !== undefined)) return;
@@ -80,7 +80,7 @@ class StorageFile {
   }
 
   onSet(key:string, callback:Function) {
-    if (this._onSetListeners[key] == null) this._onSetListeners[key] = [];
+    this._onSetListeners[key] = this._onSetListeners[key] || [];
     this._onSetListeners[key].push(callback);
     this._onSetValues[key] = JSON.stringify(this.get(key));
   }
@@ -88,7 +88,7 @@ class StorageFile {
   list() {
     var list:string[] = [], i:number, key:string;
     for (i = 0; i < this.storage.length; i++) {
-      key = this.storage.key(i);
+      key = ""+this.storage.key(i);
       if (key.substr(0, this.url.length) === this.url) {
         key = key.substr(this.url.length);
         if (key.indexOf("/") !== -1) {

@@ -4,8 +4,13 @@
 /**
  * Sound class
  * 
- * @date 19-aug-2017
+ * @date 03-oct-2017
  */
+
+interface Mark {
+  start:number,
+  duration?:number
+}
 
 class Sound {
   static enabled=true;
@@ -14,14 +19,14 @@ class Sound {
   gainNode:GainNode;
   mainNode:AudioNode;
   file:string;
-  source:AudioBufferSourceNode;
+  source:AudioBufferSourceNode|null;
   buffer:AudioBuffer;
-  marks = {};
+  marks:{[index:string]: Mark} = {};
   oneInstance:boolean;
 
   constructor(src:string, cb?:Function) {
     if (!Sound.ctx) {
-      Sound.ctx = new (window["AudioContext"] || window["webkitAudioContext"])();
+      Sound.ctx = new (AudioContext || (<any>window)["webkitAudioContext"])();
     }
     this.gainNode = Sound.ctx.createGain();
     this.gainNode.gain.value = Sound.volume;
@@ -95,6 +100,6 @@ class Sound {
   /*
     _privates
   */
-  private _playOnLoad:string;
+  private _playOnLoad:string|null;
 }
 export = Sound;

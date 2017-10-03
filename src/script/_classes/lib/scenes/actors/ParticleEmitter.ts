@@ -8,14 +8,14 @@ import Tween    = require("../../utils/Tween");
 /**
  * ParticleEmitter class
  * 
- * @date 28-sep-2017
+ * @date 03-oct-2017
  */
 
 class ParticleEmitter extends Actor {
   public pool:Tween[]=[];
   public obj:any;
-  public startProps:Object={ velocity: { magnitude: [1,8], angle:[-Math.PI,Math.PI] }, opacity:1 };
-  public endProps:Object={ opacity:0 };
+  public startProps:any={ velocity: { magnitude: [1,8], angle:[-Math.PI,Math.PI] }, opacity:1 };
+  public endProps:any={ opacity:0 };
   public duration:number=1024;
   
   constructor(scene:Scene, obj?:any) {
@@ -65,7 +65,7 @@ class ParticleEmitter extends Actor {
     if (!tween) {
       tween = new Tween(this.scene.createActor(this.obj), {}, 1024, false);
       tween.onEnd(()=>{
-        this._recycle(tween);
+        this._recycle(<Tween>tween);
       })
     }
     this.scene.addActor(<Actor>tween.object);
@@ -78,7 +78,7 @@ class ParticleEmitter extends Actor {
     this.pool.push(tween);
   }
 
-  private _setValues(src:Object, dest:Object) {
+  private _setValues(src:any, dest:any) {
     for (var key in src) {
       if (src[key] instanceof Array) {
         while (src[key].length < 2) src[key].push(src[key][0] || 0);

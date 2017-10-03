@@ -5,7 +5,7 @@ import Scene = require("../Scene")
 /**
  * Text class
  * 
- * @date 19-jul-2017
+ * @date 03-oct-2017
  */
 
 class Text extends Actor {
@@ -16,12 +16,12 @@ class Text extends Actor {
   public textBaseline:string="top";
   public color:string="";
   public outline:string;
-  public lines:string[];
+  public lines:string[]=[];
 
   set text(txt:string) {
     if (this._text != txt) {
       this._text = txt;
-      this.lines = null;
+      this.lines = [];
     }
   }
   get text() {
@@ -65,7 +65,7 @@ class Text extends Actor {
     g.font = this.fontStyle + " " + this.fontSize + "px " + this.fontFamily;
     g.textBaseline = this.textBaseline;
     g.textAlign    = this.textAlign;
-    if (!this.lines) this._wrap();
+    if (!this.lines.length) this._wrap();
     if (this.color) {
       y = 0;
       g.fillStyle = this.color;
