@@ -19,9 +19,9 @@
     "jstransformer-markdown-it": "^2.0.0",
     "less": "^2.7.2",
     "livereload": "^0.6.2",
-    "pug": "^2.0.0-rc.3",
+    "pug": "^2.0.0-rc.4",
     "tsify": "^3.0.3",
-    "typescript": "^2.5.2"
+    "typescript": "^2.5.3"
   },
   "dependencies": {
     "statify": "^2.0.1"

@@ -19,7 +19,7 @@ var os          = require("os"),
  * Jakefile.js
  * For building web apps
  *
- * @date 17-may-2017
+ * @date 03-oct-2017
  */
 var srcDir        = "./src/",
     outDir        = "./build/",
@@ -195,9 +195,7 @@ namespace("js", function(){
   var browserify_opts = {
         debug: true
       },
-      tsify_opts = {
-        noImplicitAny: true
-      };
+      tsify_opts = require("./tsconfig.json").compilerOptions;
 
   task("ts", {async:true}, function(){
     console.log("\nCompiling TypeScript...");
@@ -258,6 +256,28 @@ namespace("static", function(){
       }
     });
     console.log("...dONE!");
+  });
+});
+
+task("upgrade", { async:true }, function() {
+  console.log("\nUpgrading packages...");
+  var packages = require("./package.json");
+  var commands = [];
+  for(var pkg in packages.dependencies) {
+    commands.push("npm -S remove "+pkg);
+  }
+  for(var pkg in packages.devDependencies) {
+    commands.push("npm -D remove "+pkg);
+  }
+  for(var pkg in packages.dependencies) {
+    commands.push("npm -S install "+pkg);
+  }
+  for(var pkg in packages.devDependencies) {
+    commands.push("npm -D install "+pkg);
+  }
+  jake.exec(commands, {printStdout: true, printStderr: true}, function () {
+    console.log("...dONE!");
+    complete();
   });
 });
 
