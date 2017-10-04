@@ -1,14 +1,14 @@
 "use strict";
-import Scene    = require("../Scene");
-import Vector2  = require("../../utils/Vector2");
-import Sprite   = require("./Sprite");
-import lazyJSON = require("../../utils/lazyJSON");
+import Scene    from "../Scene";
+import Vector2  from "../../utils/Vector2";
+import Sprite   from "./Sprite";
+import lazyJSON from "../../utils/lazyJSON";
 
 
 /**
  * Actor class
  * 
- * @date 03-oct-2017
+ * @date 04-oct-2017
  */
 
 interface Animation {
@@ -16,7 +16,7 @@ interface Animation {
   speed:number;
 }
 
-class Actor {
+export default class Actor {
   public name:string;
   public type:string;
   public sprite:Sprite;
@@ -254,4 +254,3 @@ class Actor {
   }
 
 }
-export = Actor;

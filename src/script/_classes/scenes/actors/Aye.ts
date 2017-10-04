@@ -1,15 +1,15 @@
 "use strict";
-import Actor   = require("../../lib/scenes/actors/Actor");
-import Scene   = require("../../lib/scenes/Scene");
-import Vector2 = require("../../lib/utils/Vector2");
+import Actor   from "../../lib/scenes/actors/Actor";
+import Scene   from "../../lib/scenes/Scene";
+import Vector2 from "../../lib/utils/Vector2";
 
-import ParticleEmitter = require("../../lib/scenes/actors/ParticleEmitter");
+import ParticleEmitter from "../../lib/scenes/actors/ParticleEmitter";
 
 /**
  * Aye class
  */
 
-class Aye extends Actor {
+export default class Aye extends Actor {
   public state:string;
   public target:Vector2|null;
   public distanceToTarget:Vector2 = new Vector2();
@@ -86,4 +86,3 @@ class Aye extends Actor {
   */
 
 }
-export = Aye;

@@ -1,6 +1,6 @@
 "use strict";
-import Actor   = require("../../lib/scenes/actors/Actor");
-import Scene   = require("../../lib/scenes/Scene");
+import Actor   from "../../lib/scenes/actors/Actor";
+import Scene   from "../../lib/scenes/Scene";
 
 const emojis = "😀😁😂😃😄😅😆😇😈😉😊😋😌😍😎😏😐😑😒😓😔😕😖😗😘😙😚😛😜😝😞😟😠😡😢😣😤😥😦😧😨😩😪😫😬😭😮😯";
 
@@ -8,7 +8,7 @@ const emojis = "😀😁😂😃😄😅😆😇😈😉😊😋😌😍😎😏
  * Emotion class
  */
 
-class Emotion extends Actor {
+export default class Emotion extends Actor {
   public emoji:string;
 
   constructor(scene:Scene, obj:any) {
@@ -33,4 +33,3 @@ class Emotion extends Actor {
   */
 
 }
-export = Emotion;

@@ -1,14 +1,14 @@
 "use strict";
-import Game = require("./lib/Game");
+import Game from "./lib/Game";
 
-import AdventureScene  = require("./scenes/AdventureScene");
+import AdventureScene  from "./scenes/AdventureScene";
 
 
 /**
  * MyGame class
  */
 
-class MyGame extends Game {
+export default class MyGame extends Game {
   public scriptVars={}
   
   constructor(container:string|HTMLElement) {
@@ -21,4 +21,3 @@ class MyGame extends Game {
   }
 
 }
-export = MyGame;

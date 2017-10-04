@@ -1,15 +1,15 @@
 "use strict";
-import web = require("../utils/web");
+import web from "../utils/web";
 
 /**
  * StorageFile class
  * 
- * @date 03-oct-2017
+ * @date 04-oct-2017
  */
 
 var cache:{[index:string]:StorageFile} = {};
 
-class StorageFile {
+export default class StorageFile {
   public url:string;
   public storage:Storage;
   private _onSetListeners:{[index:string]:Function[]} = {};
@@ -122,4 +122,3 @@ class StorageFile {
     }
   }
 }
-export = StorageFile;

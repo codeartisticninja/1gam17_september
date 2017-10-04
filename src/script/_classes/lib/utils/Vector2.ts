@@ -1,15 +1,14 @@
 "use strict";
 
-
 /**
  * Vector2 class
  * 
- * @date 20-sep-2017
+ * @date 04-oct-2017
  */
 
 var pool:Vector2[]=[];
 
-class Vector2 {
+export default class Vector2 {
 
   static dispense() {
     return pool.pop() || new Vector2();
@@ -95,4 +94,3 @@ class Vector2 {
   }
 
 }
-export = Vector2;

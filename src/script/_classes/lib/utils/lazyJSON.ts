@@ -1,11 +1,12 @@
 "use strict";
-import Vector2 = require("./Vector2");
+import Vector2 from "./Vector2";
 
 /**
  * lazyJSON module
  * 
- * @date 18-jul-2017
+ * @date 04-oct-2017
  */
+
 module lazyJSON {
   export function lazyJSON(json:string) {
     try {
@@ -46,4 +47,4 @@ module lazyJSON {
     _;
 
 }
-export = lazyJSON;
+export default lazyJSON;

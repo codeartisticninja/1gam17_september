@@ -1,13 +1,12 @@
 "use strict";
 
-
 /**
  * Tween class
  * 
- * @date 03-oct-2017
+ * @date 04-oct-2017
  */
 
-class Tween {
+export default class Tween {
   constructor(public object:any, public endProps:any, public duration:number, autostart=true) {
     this.update = this.update.bind(this);
     if (autostart) this.start();
@@ -76,4 +75,3 @@ class Tween {
   }
 
 }
-export = Tween;

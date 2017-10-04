@@ -1,17 +1,17 @@
 "use strict";
-import Actor    = require("./Actor");
-import Scene    = require("../Scene");
-import Vector2  = require("../../utils/Vector2");
-import Tween    = require("../../utils/Tween");
+import Actor    from "./Actor";
+import Scene    from "../Scene";
+import Vector2  from "../../utils/Vector2";
+import Tween    from "../../utils/Tween";
 
 
 /**
  * ParticleEmitter class
  * 
- * @date 03-oct-2017
+ * @date 04-oct-2017
  */
 
-class ParticleEmitter extends Actor {
+export default class ParticleEmitter extends Actor {
   public pool:Tween[]=[];
   public obj:any;
   public startProps:any={ velocity: { magnitude: [1,8], angle:[-Math.PI,Math.PI] }, opacity:1 };
@@ -93,4 +93,3 @@ class ParticleEmitter extends Actor {
   }
 
 }
-export = ParticleEmitter;

@@ -1,13 +1,13 @@
 "use strict";
-import Tween = require("./Tween");
+import Tween from "./Tween";
 
 /**
  * MediaPlayer class
  * 
- * @date 03-oct-2017
+ * @date 04-oct-2017
  */
 
-class MediaPlayer {
+export default class MediaPlayer {
   public players:HTMLAudioElement[]=[];
 
   get enabled() {
@@ -97,4 +97,3 @@ class MediaPlayer {
   }
 
 }
-export = MediaPlayer;

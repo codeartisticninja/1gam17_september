@@ -1,10 +1,10 @@
 "use strict";
-import web = require("./web");
+import web from "./web";
 
 /**
  * Sound class
  * 
- * @date 03-oct-2017
+ * @date 04-oct-2017
  */
 
 interface Mark {
@@ -12,7 +12,7 @@ interface Mark {
   duration?:number
 }
 
-class Sound {
+export default class Sound {
   static enabled=true;
   static volume=1;
   static ctx:AudioContext;
@@ -98,4 +98,3 @@ class Sound {
   */
   private _playOnLoad:string|null;
 }
-export = Sound;

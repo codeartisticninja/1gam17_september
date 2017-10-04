@@ -1,10 +1,10 @@
 "use strict";
-import StorageFile = require("./utils/StorageFile");
-import MediaPlayer = require("./utils/MediaPlayer");
-import Sound       = require("./utils/Sound");
-import Scene       = require("./scenes/Scene");
-import joypad      = require("./utils/webJoypad");
-import Vector2     = require("./utils/Vector2");
+import StorageFile from "./utils/StorageFile";
+import MediaPlayer from "./utils/MediaPlayer";
+import Sound       from "./utils/Sound";
+import Scene       from "./scenes/Scene";
+import joypad      from "./utils/webJoypad";
+import Vector2     from "./utils/Vector2";
 
 if (!Element.prototype.requestFullscreen) {
     Element.prototype.requestFullscreen = 
@@ -20,10 +20,10 @@ if (!window.requestAnimationFrame) {
 /**
  * BaseGameApp class
  * 
- * @date 03-oct-2017
+ * @date 04-oct-2017
  */
 
-class Game {
+export default class Game {
   public container:HTMLElement;
   public canvas:HTMLCanvasElement;
   public ctx:CanvasRenderingContext2D;
@@ -217,4 +217,3 @@ class Game {
     if (this.scene) this.scene.click(e.offsetX * scaleX, e.offsetY * scaleY);
   }
 }
-export = Game;

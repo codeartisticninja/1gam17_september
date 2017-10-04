@@ -1,14 +1,14 @@
 "use strict";
-import Vector2 = require("../../utils/Vector2");
+import Vector2 from "../../utils/Vector2";
 
 
 /**
  * Sprite class
  * 
- * @date 07-jun-2017
+ * @date 04-oct-2017
  */
 
-class Sprite {
+export default class Sprite {
   ctx:CanvasRenderingContext2D;
   name:string;
   img:HTMLImageElement;
@@ -54,4 +54,3 @@ class Sprite {
     _privates
   */
 }
-export = Sprite;

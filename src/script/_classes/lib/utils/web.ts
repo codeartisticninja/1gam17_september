@@ -1,11 +1,12 @@
 "use strict";
-import lazyJSON = require("./lazyJSON");
+import lazyJSON from "./lazyJSON";
 
 /**
  * web module
  * 
- * @date 03-oct-2017
+ * @date 04-oct-2017
  */
+
 module web {
   export function get(url:string, options?:any, cb?:Function) {
     let req = new XMLHttpRequest();
@@ -138,4 +139,4 @@ module web {
   }
 
 }
-export = web;
+export default web;

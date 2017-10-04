@@ -1,14 +1,14 @@
 "use strict";
-import Actor = require("./Actor");
-import Scene = require("../Scene");
+import Actor from "./Actor";
+import Scene from "../Scene";
 
 /**
  * Scenery class
  * 
- * @date 03-oct-2017
+ * @date 04-oct-2017
  */
 
-class Scenery extends Actor {
+export default class Scenery extends Actor {
   public img = new Image();
 
   constructor(scene:Scene, obj:any) {
@@ -36,4 +36,3 @@ class Scenery extends Actor {
     _privates
   */
 }
-export = Scenery;

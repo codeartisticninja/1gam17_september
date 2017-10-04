@@ -1,22 +1,22 @@
 "use strict";
-import Game        = require("../Game");
-import Actor       = require("./actors/Actor");
-import Sprite      = require("./actors/Sprite");
-import Scenery     = require("./actors/Scenery");
-import Vector2     = require("../utils/Vector2");
-import web         = require("../utils/web");
-import lazyJSON    = require("../utils/lazyJSON");
+import Game        from "../Game";
+import Actor       from "./actors/Actor";
+import Sprite      from "./actors/Sprite";
+import Scenery     from "./actors/Scenery";
+import Vector2     from "../utils/Vector2";
+import web         from "../utils/web";
+import lazyJSON    from "../utils/lazyJSON";
 
-import Text        = require("./actors/Text");
+import Text        from "./actors/Text";
 
 /**
  * Scene class
  * 
- * @date 03-oct-2017
+ * @date 04-oct-2017
  */
 
 
-class Scene {
+export default class Scene {
   public actorTypes:{[index:string]:typeof Actor} = {};
   public actors:Actor[];
   public actorsByType:{[index:string]: Actor[]};
@@ -263,4 +263,3 @@ class Scene {
   private _alarms:Array<any>=[];
 
 }
-export = Scene;

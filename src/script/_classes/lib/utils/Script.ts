@@ -1,13 +1,13 @@
 "use strict";
-import web = require("./web");
+import web from "./web";
 
 /**
  * Script class
  * 
- * @date 03-oct-2017
+ * @date 04-oct-2017
  */
 
-class Script {
+export default class Script {
   public url:string;
   public storyTree:XMLDocument;
   public commands: { [key:string]:Function }={};
@@ -239,4 +239,3 @@ class Script {
   }
 
 }
-export = Script;

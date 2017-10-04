@@ -1,21 +1,21 @@
 "use strict";
-import Scene       = require("../lib/scenes/Scene");
-import myGame      = require("../MyGame");
-import Sprite      = require("../lib/scenes/actors/Sprite");
-import Actor       = require("../lib/scenes/actors/Actor");
-import MediaPlayer = require("../lib/utils/MediaPlayer");
-import Script      = require("../lib/utils/Script");
+import Scene       from "../lib/scenes/Scene";
+import myGame      from "../MyGame";
+import Sprite      from "../lib/scenes/actors/Sprite";
+import Actor       from "../lib/scenes/actors/Actor";
+import MediaPlayer from "../lib/utils/MediaPlayer";
+import Script      from "../lib/utils/Script";
 
-import ParticleEmitter = require("../lib/scenes/actors/ParticleEmitter");
-import Aye             = require("./actors/Aye");
-import Emotion         = require("./actors/Emotion");
-import Pill            = require("./actors/Pill");
+import ParticleEmitter from "../lib/scenes/actors/ParticleEmitter";
+import Aye             from "./actors/Aye";
+import Emotion         from "./actors/Emotion";
+import Pill            from "./actors/Pill";
 
 /**
  * AdventureScene class
  */
 
-class AdventureScene extends Scene {
+export default class AdventureScene extends Scene {
   public game:myGame;
   public script:Script;
 
@@ -71,4 +71,3 @@ class AdventureScene extends Scene {
     }
   }
 }
-export = AdventureScene;

@@ -1,14 +1,14 @@
 "use strict";
-import Actor   = require("../../lib/scenes/actors/Actor");
-import Scene   = require("../../lib/scenes/Scene");
-import Tween   = require("../../lib/utils/Tween");
-import Vector2 = require("../../lib/utils/Vector2");
+import Actor   from "../../lib/scenes/actors/Actor";
+import Scene   from "../../lib/scenes/Scene";
+import Tween   from "../../lib/utils/Tween";
+import Vector2 from "../../lib/utils/Vector2";
 
 /**
  * Pill class
  */
 
-class Pill extends Actor {
+export default class Pill extends Actor {
   public taken:Actor;
 
   constructor(scene:Scene, obj:any) {
@@ -72,4 +72,3 @@ class Pill extends Actor {
   private _v=new Vector2();
 
 }
-export = Pill;

@@ -1,10 +1,10 @@
 "use strict";
-import Vector2 = require("./Vector2");
+import Vector2 from "./Vector2";
 
 /**
  * joypad module for unified game controls on the web
  * 
- * @date 03-oct-2017
+ * @date 04-oct-2017
  */
 if (!window.requestAnimationFrame) {
   window.requestAnimationFrame = webkitRequestAnimationFrame || function(cb:Function){ return setTimeout(cb, 32) };
@@ -498,4 +498,4 @@ module joypad {
     _;
 
 }
-export = joypad;
+export default joypad;

@@ -1,5 +1,5 @@
 "use strict";
-import MyGame  = require("./_classes/MyGame");
+import MyGame from "./_classes/MyGame";
 
 /**
  * main.ts

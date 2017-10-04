@@ -1,14 +1,14 @@
 "use strict";
-import Actor = require("./Actor");
-import Scene = require("../Scene")
+import Actor from "./Actor";
+import Scene from "../Scene";
 
 /**
  * Text class
  * 
- * @date 03-oct-2017
+ * @date 04-oct-2017
  */
 
-class Text extends Actor {
+export default class Text extends Actor {
   public fontSize:number=20;
   public lineHeight:number=1;
   public fontStyle:string="";
@@ -107,4 +107,3 @@ class Text extends Actor {
   }
 
 }
-export = Text;
